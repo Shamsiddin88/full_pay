@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "186210644787",
+    "firebase_url": "https://full-pay-cb56c-default-rtdb.asia-southeast1.firebasedatabase.app",
+    "project_id": "full-pay-cb56c",
+    "storage_bucket": "full-pay-cb56c.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:186210644787:android:044298b1f0efb73a234446",
+        "android_client_info": {
+          "package_name": "uz.full.pay"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "186210644787-eq7omebfmp0gvvp6vkbvf9delip377hf.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "uz.full.pay",
+            "certificate_hash": "d94975e9ddb88ada85ce658368e036eb91b3d88a"
+          }
+        },
+        {
+          "client_id": "186210644787-12cufd779hm2v1f5nmuljo3tj99fta5s.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBaVKJfVMacahyp9gC0pUstU3pYjVXhWik"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "186210644787-12cufd779hm2v1f5nmuljo3tj99fta5s.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
