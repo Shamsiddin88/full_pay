@@ -5,10 +5,12 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:full_pay/blocs/auth/auth_bloc.dart';
 import 'package:full_pay/blocs/auth/auth_state.dart';
+import 'package:full_pay/blocs/user_profile/user_profile_bloc.dart';
 import 'package:full_pay/data/forms_status.dart';
 import 'package:full_pay/data/local/storage_repository.dart';
 import 'package:full_pay/screens/routes.dart';
 import 'package:full_pay/utils/colors/app_colors.dart';
+import 'package:full_pay/utils/constants/app_constants.dart';
 import 'package:full_pay/utils/images/app_images.dart';
 import 'package:full_pay/utils/project_extensions.dart';
 import 'package:full_pay/utils/styles/app_text_style.dart';
@@ -21,14 +23,15 @@ class SplashScreen extends StatefulWidget {
 }
 
 class _SplashScreenState extends State<SplashScreen> {
+  bool hasPin = false;
+
   _init(bool isAuthenticated) async {
     await Future.delayed(
       const Duration(seconds: 3),
     );
     if (!mounted) return;
 
-
-    if (isAuthenticated==false) {
+    if (isAuthenticated == false) {
       bool isNewUser = StorageRepository.getBool(key: "is_new_user");
       if (isNewUser) {
         Navigator.pushReplacementNamed(context, RouteNames.authRoute);
@@ -36,11 +39,17 @@ class _SplashScreenState extends State<SplashScreen> {
         Navigator.pushReplacementNamed(context, RouteNames.onBoardingRoute);
       }
     } else {
-      Navigator.pushReplacementNamed(context, RouteNames.tabRoute);
+      Navigator.pushReplacementNamed(
+          context, hasPin ? RouteNames.entryPinRoute : RouteNames.setPinRoute);
     }
   }
 
+  @override
+  void initState() {
+    hasPin = StorageRepository.getString(key: AppConstants.pinCode).isNotEmpty;
 
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -50,10 +59,11 @@ class _SplashScreenState extends State<SplashScreen> {
     return Scaffold(
         body: BlocListener<AuthBloc, AuthState>(
       listener: (context, state) {
-        if (state.status == FormsStatus.authenticated){
+        if (state.status == FormsStatus.authenticated) {
+          BlocProvider.of<UserProfileBloc>(context)
+              .add(GetCurrentUserEvent(FirebaseAuth.instance.currentUser!.uid));
           _init(true);
-        }
-        else {
+        } else {
           _init(false);
         }
       },

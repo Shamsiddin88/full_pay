@@ -39,7 +39,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
       AppConstants.textRegExp.hasMatch(userNameController.text) &&
       AppConstants.phoneRegExp.hasMatch(phoneNumberController.text) &&
       AppConstants.passwordRegExp.hasMatch(confirmPasswordController.text) &&
-      AppConstants.textRegExp.hasMatch(lastNameController.text);
+      AppConstants.textRegExp.hasMatch(lastNameController.text) &&
+      passwordController.text == confirmPasswordController.text;
 
   @override
   void dispose() {
@@ -63,112 +64,111 @@ class _RegisterScreenState extends State<RegisterScreen> {
         body: BlocConsumer<AuthBloc, AuthState>(
           builder: (context, state) {
             return SingleChildScrollView(
-                  child: Padding(
-                      padding: EdgeInsets.symmetric(horizontal: 44.w),
-                      child: Form(
-                        key: formKey,
-                        child: Column(
-                          children: [
-                            Padding(
-                              padding: const EdgeInsets.all(24.0),
-                              child: Image.asset(
-                                AppImages.welcome,
-                                height: 250.h,
-                              ),
+                child: Padding(
+                    padding: EdgeInsets.symmetric(horizontal: 44.w),
+                    child: Form(
+                      key: formKey,
+                      child: Column(
+                        children: [
+                          Padding(
+                            padding: const EdgeInsets.all(24.0),
+                            child: Image.asset(
+                              AppImages.welcome,
+                              height: 250.h,
                             ),
-                            16.getH(),
-                            Text("Ro'yxatdan o'tish",
-                                style: Theme.of(context).textTheme.bodyLarge),
-                            16.getH(),
-                            UniversalTextInput(
-                              onChanged: (v) {
-                                setState(() {});
+                          ),
+                          16.getH(),
+                          Text("Ro'yxatdan o'tish",
+                              style: Theme.of(context).textTheme.bodyLarge),
+                          16.getH(),
+                          UniversalTextInput(
+                            onChanged: (v) {
+                              setState(() {});
+                            },
+                            controller: userNameController,
+                            hintText: "Ism",
+                            type: TextInputType.text,
+                            regExp: AppConstants.textRegExp,
+                            errorTitle: "Ism noto'g'ri",
+                            iconPath: AppImages.profile,
+                          ),
+                          16.getH(),
+                          UniversalTextInput(
+                            onChanged: (v) {
+                              setState(() {});
+                            },
+                            controller: lastNameController,
+                            hintText: "Familiya",
+                            type: TextInputType.text,
+                            regExp: AppConstants.textRegExp,
+                            errorTitle: "Familiya noto'g'ri",
+                            iconPath: AppImages.profile,
+                          ),
+                          16.getH(),
+                          UniversalTextInput(
+                            onChanged: (v) {
+                              setState(() {});
+                            },
+                            controller: phoneNumberController,
+                            hintText: "Telefon",
+                            type: TextInputType.phone,
+                            regExp: AppConstants.phoneRegExp,
+                            errorTitle: "Telefon noto'g'ri",
+                            iconPath: AppImages.phone,
+                          ),
+                          16.getH(),
+                          PasswordTextInput(
+                            onChanged: (v) {
+                              setState(() {});
+                            },
+                            controller: passwordController,
+                          ),
+                          16.getH(),
+                          PasswordTextInput(
+                            onChanged: (v) {
+                              setState(() {});
+                            },
+                            controller: confirmPasswordController,
+                          ),
+                          13.getH(),
+                          MyCustomButton(
+                              onTap: () {
+                                context.read<AuthBloc>().add(RegisterUserEvent(
+                                        userModel: UserModel(
+                                      username: userNameController.text,
+                                      password: passwordController.text,
+                                      lastname: lastNameController.text,
+                                      email:
+                                          "${userNameController.text.toLowerCase()}@gmail.com"
+                                              .trim(),
+                                      imageUrl: "",
+                                      phoneNumber: phoneNumberController.text,
+                                      userId: "",
+                                          fcm: "",
+                                          authUid: ""
+                                    )));
                               },
-                              controller: userNameController,
-                              hintText: "Ism",
-                              type: TextInputType.text,
-                              regExp: AppConstants.textRegExp,
-                              errorTitle: "Ism noto'g'ri",
-                              iconPath: AppImages.profile,
-                            ),
-                            16.getH(),
-                            UniversalTextInput(
-                              onChanged: (v) {
-                                setState(() {});
-                              },
-                              controller: lastNameController,
-                              hintText: "Familiya",
-                              type: TextInputType.text,
-                              regExp: AppConstants.textRegExp,
-                              errorTitle: "Familiya noto'g'ri",
-                              iconPath: AppImages.profile,
-                            ),
-                            16.getH(),
-                            UniversalTextInput(
-                              onChanged: (v) {
-                                setState(() {});
-                              },
-                              controller: phoneNumberController,
-                              hintText: "Telefon",
-                              type: TextInputType.phone,
-                              regExp: AppConstants.phoneRegExp,
-                              errorTitle: "Telefon noto'g'ri",
-                              iconPath: AppImages.phone,
-                            ),
-                            16.getH(),
-                            PasswordTextInput(
-                              onChanged: (v) {
-                                setState(() {});
-                              },
-                              controller: passwordController,
-                            ),
-                            16.getH(),
-                            PasswordTextInput(
-                              onChanged: (v) {
-                                setState(() {});
-                              },
-                              controller: confirmPasswordController,
-                            ),
-                            13.getH(),
-                            MyCustomButton(
-                                onTap: () {
-                                  context
-                                      .read<AuthBloc>()
-                                      .add(RegisterUserEvent(
-                                          userModel: UserModel(
-                                        username: userNameController.text,
-                                        password: passwordController.text,
-                                        lastname: lastNameController.text,
-                                        email:
-                                            "${userNameController.text}@gmail.com"
-                                                .trim(),
-                                        imageUrl: "",
-                                        phoneNumber: phoneNumberController.text,
-                                        userId: "",
-                                      )));
-                                },
-                                title: "Register"),
-                            13.getH(),
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                Text("Oldin ro'yxatdan o'tganmisiz?"),
-                                TextButton(
-                                    onPressed: () {
-                                      Navigator.pop(context);
-                                    },
-                                    child: Text("Kirish"))
-                              ],
-                            )
-                          ],
-                        ),
-                      ))
-
-            );
+                              title: "Register",readyToSubmit: isValidLoginCredentials(),),
+                          13.getH(),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Text("Oldin ro'yxatdan o'tganmisiz?"),
+                              TextButton(
+                                  onPressed: () {
+                                    Navigator.pop(context);
+                                  },
+                                  child: Text("Kirish"))
+                            ],
+                          )
+                        ],
+                      ),
+                    )));
           },
           listener: (context, state) {
             if (state.status == FormsStatus.error) {
-              ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(state.errorMessage)));
+              ScaffoldMessenger.of(context)
+                  .showSnackBar(SnackBar(content: Text(state.errorMessage)));
             }
           },
         ),

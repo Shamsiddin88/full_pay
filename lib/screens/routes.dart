@@ -1,10 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:full_pay/screens/auth/auth_screen.dart';
 import 'package:full_pay/screens/auth/register_screen.dart';
+import 'package:full_pay/screens/edit_profile_screen/edit_profile_screen.dart';
+import 'package:full_pay/screens/local_auth/method_one/confirm_pin_screen.dart';
+import 'package:full_pay/screens/local_auth/method_one/entry_pin_screen.dart';
+import 'package:full_pay/screens/local_auth/method_one/set_pin_screen.dart';
+import 'package:full_pay/screens/local_auth/method_two/touch_id_screen.dart';
 import 'package:full_pay/screens/no_internet/no_internet_screen.dart';
 import 'package:full_pay/screens/on_boarding/on_boarding_screen.dart';
 import 'package:full_pay/screens/payment/payment_screen.dart';
+import 'package:full_pay/screens/security/security_screen.dart';
 import 'package:full_pay/screens/splash/splash_screen.dart';
+import 'package:full_pay/screens/tab/card/add_card_screen.dart';
 import 'package:full_pay/screens/tab/tab_screen.dart';
 import 'package:full_pay/screens/transfer/transfer_screen.dart';
 
@@ -29,9 +36,22 @@ class AppRoutes {
         return navigate(const AuthScreen());
         case RouteNames.registerRoute:
           return navigate(const RegisterScreen());
-
       case RouteNames.onBoardingRoute:
         return navigate(const OnBoardingScreen());
+      case RouteNames.setPinRoute:
+        return navigate(const SetPinScreen());
+      case RouteNames.confirmPinRoute:
+        return navigate(ConfirmPinScreen(previousPin: settings.arguments as String,));
+      case RouteNames.entryPinRoute:
+        return navigate(const EntryPinScreen());
+      case RouteNames.touchIdRoute:
+        return navigate(const TouchIdScreen());
+      case RouteNames.editProfileRoute:
+        return navigate(const EditProfileScreen());
+      case RouteNames.securityRoute:
+        return navigate(const SecurityScreen());
+      case RouteNames.addCardRoute:
+        return navigate(const AddCardScreen());
 
       default:
         return navigate(
@@ -58,4 +78,11 @@ class RouteNames {
   static const String paymentRoute = "/payment_route";
   static const String transferRoute = "/transfer_route";
   static const String onBoardingRoute = "/on_boarding_route";
+  static const String setPinRoute = "/set_pin_route";
+  static const String confirmPinRoute = "/confirm_pin_route";
+  static const String entryPinRoute = "/entry_pin_route";
+  static const String touchIdRoute = "/touch_pin_route";
+  static const String editProfileRoute = "/edit_profile_route";
+  static const String securityRoute = "/security_route";
+  static const String addCardRoute = "/add_card_route";
 }

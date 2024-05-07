@@ -19,12 +19,12 @@ class AuthState extends Equatable {
     String? errorMessage,
     String? statusMessage,
     FormsStatus? status,
-    UserModel? userCredential
+    UserModel? userModel
   }) {
     return AuthState(status: status ?? this.status,
         errorMessage: errorMessage ?? this.errorMessage,
         statusMessage: statusMessage ?? this.statusMessage,
-        userModel: userCredential ?? this.userModel
+        userModel: userModel ?? this.userModel
     );
   }
 

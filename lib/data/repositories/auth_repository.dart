@@ -1,6 +1,8 @@
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:full_pay/data/local/storage_repository.dart';
 import 'package:full_pay/data/models/exceptions/firebase_exceptions.dart';
 import 'package:full_pay/data/models/network_response.dart';
+import 'package:full_pay/utils/constants/app_constants.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 
 class AuthRepository {
@@ -76,6 +78,9 @@ class AuthRepository {
 
   Future <NetworkResponse> logOutUser() async {
     try {
+      await StorageRepository.setString(key: AppConstants.pinCode, value: "");
+      await StorageRepository.setBool(key: AppConstants.biometricsEnabled, value: false);
+
       await FirebaseAuth.instance.signOut();
       return NetworkResponse(data: "success");
     } on FirebaseAuthException catch (e) {

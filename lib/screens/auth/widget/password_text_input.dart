@@ -22,7 +22,8 @@ class _PasswordTextInputState extends State<PasswordTextInput> {
     return Material(
       color: Colors.transparent,
       elevation: 10,
-      child: TextFormField(
+      child:
+      TextFormField(
         onChanged: widget.onChanged,
         style: Theme
             .of(context)
