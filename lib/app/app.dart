@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:full_pay/blocs/auth/auth_bloc.dart';
 import 'package:full_pay/blocs/auth/auth_event.dart';
+import 'package:full_pay/blocs/transaction/transaction_bloc.dart';
 import 'package:full_pay/blocs/user_cards/user_cards_bloc.dart';
 import 'package:full_pay/blocs/user_cards/user_cards_event.dart';
 import 'package:full_pay/blocs/user_profile/user_profile_bloc.dart';
@@ -38,7 +39,13 @@ class App extends StatelessWidget {
           BlocProvider(
               create: (context) => UserCardsBloc(
                   cardsRepository: context.read<CardsRepository>())
-                ..add(GetCardsDatabaseEvent())),
+                ..add(GetCardsDatabaseEvent())..add(GetActiveCards())),
+          BlocProvider(
+            create: (context) => TransactionBloc(
+              cardsRepository: context.read<CardsRepository>(),
+            ),
+          )
+
         ],
         child: MaterialApp(
           debugShowCheckedModeBanner: false,

@@ -1,14 +1,9 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:full_pay/data/forms_status.dart';
 import 'package:full_pay/data/models/network_response.dart';
 import 'package:full_pay/data/models/user_model.dart';
 import 'package:full_pay/data/repositories/auth_repository.dart';
-import 'package:full_pay/screens/routes.dart';
-import 'package:google_sign_in/google_sign_in.dart';
-
 import 'auth_event.dart';
 import 'auth_state.dart';
 

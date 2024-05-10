@@ -6,9 +6,10 @@ import 'package:full_pay/blocs/user_cards/user_cards_state.dart';
 import 'package:full_pay/data/forms_status.dart';
 import 'package:full_pay/data/models/card_model.dart';
 import 'package:full_pay/screens/auth/widget/my_custom_button.dart';
-import 'package:full_pay/screens/edit_profile_screen/widget/edit_text_input.dart';
-import 'package:full_pay/utils/constants/app_constants.dart';
-import 'package:full_pay/utils/project_extensions.dart';
+import 'package:full_pay/screens/tab/card/widgets/card_item_view.dart';
+import 'package:full_pay/screens/tab/card/widgets/card_number_input.dart';
+import 'package:full_pay/screens/tab/card/widgets/expire_date_input.dart';
+import 'package:full_pay/utils/styles/app_text_style.dart';
 
 class AddCardScreen extends StatefulWidget {
   const AddCardScreen({super.key});
@@ -19,61 +20,111 @@ class AddCardScreen extends StatefulWidget {
 
 class _AddCardScreenState extends State<AddCardScreen> {
   final TextEditingController cardNumber = TextEditingController();
-
   final TextEditingController expireDate = TextEditingController();
+
+  final FocusNode cardFocusNode = FocusNode();
+  final FocusNode expireDateFocusNode = FocusNode();
+  CardModel cardModel = CardModel.initial();
+
+  @override
+  void initState() {
+    cardNumber.addListener(() {
+      setState(() {});
+      cardModel =
+          cardModel.copyWith(cardNumber: cardNumber.text.replaceAll(" ", ""));
+    });
+
+    expireDate.addListener(() {
+      setState(() {});
+      cardModel =
+          cardModel.copyWith(expireDate: expireDate.text.replaceAll(" ", ""));
+    });
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text("Add Card"),),
-      body: BlocConsumer<UserCardsBloc, UserCardsState>(
-        listener: (context, state) {
-          if (state.statusMessage=="added"){
+      resizeToAvoidBottomInset: false,
+      appBar: AppBar(
+        leading: IconButton(
+          icon: const Icon(
+            Icons.arrow_back,
+            color: Colors.white,
+          ),
+          onPressed: () {
             Navigator.pop(context);
-          }
-        },
+          },
+        ),
+        title: Text(
+          "Karta biriktirish",
+          style: AppTextStyle.interSemiBold.copyWith(color: Colors.white),
+        ),
+      ),
+      body: BlocConsumer<UserCardsBloc, UserCardsState>(
         builder: (context, state) {
-          return Padding(
-            padding: EdgeInsets.symmetric(horizontal: 24.w, vertical: 24.h),
-            child: Column(children: [
+          return Column(
+            children: [
+              CardItemView(cardModel: cardModel),
+              CardNumberInput(
+                controller: cardNumber,
+                focusNode: cardFocusNode,
+              ),
+              ExpireDateInput(
+                focusNode: expireDateFocusNode,
+                controller: expireDate,
+              ),
+              const Spacer(),
+              MyCustomButton(
+                onTap: () {
+                  if (cardModel.cardNumber.length != 16) {
+                    return;
+                  }
+                  if (cardModel.expireDate.length != 5) {
+                    return;
+                  }
 
-              EditTextInput(controller: cardNumber, hintText: "Card number", type: TextInputType.number, errorTitle: "card number", regExp: AppConstants.number,),
-              20.getH(),
-              EditTextInput(controller: expireDate, hintText: "Expire Date", type: TextInputType.text, errorTitle: "Expire Date", regExp: AppConstants.textRegExp,),
-              20.getH(),
-              MyCustomButton(onTap: (){
-                List <CardModel> db=state.cardsDB;
-                List <CardModel> myCards=state.userCards;
-                bool isExist = false;
+                  List<CardModel> db = state.cardsDB;
+                  List<CardModel> myCards = state.userCards;
 
-                for (var element in myCards) {
-                    if (element.cardNumber==cardNumber.text){
+                  bool isExist = false;
+
+                  for (var element in myCards) {
+                    if (element.cardNumber == cardModel.cardNumber) {
                       isExist = true;
                       break;
                     }
-                }
-
-                CardModel? cardModel;
-
-                bool hasInDb = false;
-
-                for (var element in db) {
-                  if (element.cardNumber==cardNumber.text){
-                    hasInDb = true;
-                    cardModel=element;
-                    break;
                   }
-                }
 
-                if(!isExist && hasInDb){
-                  context.read<UserCardsBloc>().add(AddCardEvent(cardModel!));
-                }
-                else {
-                  ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("Karta oldin qo'shilgan yoki bazada mavjud emas")));
-                }
-                }, title: "Add Card", isLoading: state.status==FormsStatus.loading,)
-            ],),
+                  bool hasInDB = false;
+                  for (var element in db) {
+                    if (element.cardNumber == cardModel.cardNumber) {
+                      hasInDB = true;
+                      cardModel = element;
+                      break;
+                    }
+                  }
+                  if ((!isExist) && hasInDB) {
+                    context.read<UserCardsBloc>().add(AddCardEvent(cardModel));
+                  } else {
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      const SnackBar(
+                        content:
+                        Text("Karta qo'shilgan yoki bazada mavjud emas!"),
+                      ),
+                    );
+                  }
+                },
+                title: "Qo'shish",
+                isLoading: state.status == FormsStatus.loading,
+              ),
+            ],
           );
+        },
+        listener: (context, state) {
+          if (state.statusMessage == "added") {
+            Navigator.pop(context);
+          }
         },
       ),
     );

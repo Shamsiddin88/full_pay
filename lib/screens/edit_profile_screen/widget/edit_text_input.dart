@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 import '../../../utils/colors/app_colors.dart';
@@ -11,7 +12,8 @@ class EditTextInput extends StatelessWidget {
         required this.type,
         required this.regExp,
         required this.errorTitle,
-        this.onChanged});
+        this.onChanged,
+        this.inputFormatter});
 
   final TextEditingController controller;
   final String hintText;
@@ -19,6 +21,7 @@ class EditTextInput extends StatelessWidget {
   final RegExp regExp;
   final String errorTitle;
   final ValueChanged<String>? onChanged;
+  final TextInputFormatter? inputFormatter;
 
   @override
   Widget build(BuildContext context) {
@@ -42,6 +45,7 @@ class EditTextInput extends StatelessWidget {
             return null;
           },
           autovalidateMode: AutovalidateMode.onUserInteraction,
+          inputFormatters: [if(inputFormatter!=null) inputFormatter!],
           decoration: InputDecoration(
               fillColor: Theme.of(context).primaryColorLight,
               border: OutlineInputBorder(borderRadius: BorderRadius.circular(8)),

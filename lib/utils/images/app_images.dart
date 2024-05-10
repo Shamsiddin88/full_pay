@@ -13,6 +13,10 @@ class AppImages {
   static const String onBoardingOne="assets/images/on_boarding_one.png";
   static const String onBoardingTwo="assets/images/on_boarding_two.png";
   static const String onBoardingThree="assets/images/on_boarding_three.png";
+  static const String uzcard="assets/images/uzcard.png";
+  static const String humo="assets/images/humo.png";
+  static const String chip="assets/images/chip.png";
+  static const String visa="assets/images/visa.png";
 
   //.svg
   static const String delete = "assets/icons/delete.svg";

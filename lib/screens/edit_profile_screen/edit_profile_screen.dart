@@ -65,7 +65,8 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                       ),
                       child: ClipRRect(
                         borderRadius: BorderRadius.circular(50),
-                        child: CachedNetworkImage(
+                        child:
+                        CachedNetworkImage(
                           imageUrl: state.userModel.imageUrl.isEmpty
                               ? "https://img.freepik.com/premium-vector/3d-realistic-person-people_165488-4529.jpg"
                               : state.userModel.imageUrl,

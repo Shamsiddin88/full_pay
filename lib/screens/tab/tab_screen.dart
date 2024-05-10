@@ -1,5 +1,10 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:full_pay/blocs/transaction/transaction_bloc.dart';
+import 'package:full_pay/blocs/user_cards/user_cards_bloc.dart';
+import 'package:full_pay/blocs/user_cards/user_cards_event.dart';
+import 'package:full_pay/screens/routes.dart';
 import 'package:full_pay/screens/tab/card/card_screen.dart';
 import 'package:full_pay/screens/tab/history/history_screen.dart';
 import 'package:full_pay/screens/tab/home/home_screen.dart';
@@ -78,6 +83,14 @@ class _TabScreenState extends State<TabScreen> {
           ],
         ),
       ),
+      floatingActionButton: FloatingActionButton(onPressed: () {
+        // context.read<TransactionBloc>().add(SetInitialEvent());
+        context.read<UserCardsBloc>().add(GetCardsByUserIdEvent(userId: FirebaseAuth.instance.currentUser!.uid));
+        Navigator.pushNamed(context, RouteNames.transferRoute);
+      },
+      child: Icon(Icons.add_card),),
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
+
     );
   }
 }
