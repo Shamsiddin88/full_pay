@@ -1,5 +1,6 @@
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
+import 'package:flutter/foundation.dart';
 import 'package:full_pay/blocs/transaction/transaction_state.dart';
 import 'package:full_pay/data/forms_status.dart';
 import 'package:full_pay/data/models/card_model.dart';
@@ -8,20 +9,25 @@ import 'package:full_pay/data/repositories/cards_repository.dart';
 
 part 'transaction_event.dart';
 
+
 class TransactionBloc extends Bloc<TransactionEvent, TransactionState> {
   TransactionBloc({required this.cardsRepository})
-      : super(TransactionState(
-            status: FormsStatus.pure,
-            errorMessage: "",
-            statusMessage: "",
-            receiverCard: CardModel.initial(),
-            senderCard: CardModel.initial(),
-            amount: 0.0)) {
+      : super(
+    TransactionState(
+      status: FormsStatus.pure,
+      errorMessage: "",
+      statusMessage: "",
+      receiverCard: CardModel.initial(),
+      senderCard: CardModel.initial(),
+      amount: 0.0,
+    ),
+  ) {
     on<SetAmountEvent>(_setAmount);
     on<SetReceiverCardEvent>(_setReceiverCard);
     on<SetSenderCardEvent>(_setSenderCard);
     on<CheckValidationEvent>(_checkValidation);
     on<RunTransactionEvent>(_runTransaction);
+    on<SetInitialEvent>(_setInitial);
   }
 
   final CardsRepository cardsRepository;
@@ -39,12 +45,20 @@ class TransactionBloc extends Bloc<TransactionEvent, TransactionState> {
   }
 
   _checkValidation(CheckValidationEvent event, emit) {
+
+    debugPrint("RECEIVER CARD : ${state.receiverCard.cardNumber}");
+    debugPrint("SENDER CARD : ${state.senderCard.cardNumber}");
+    debugPrint("AMOUNT : ${state.amount}");
+
     if (state.amount < 1000 ||
         state.receiverCard.cardNumber.length != 16 ||
         state.senderCard.balance < 1000 ||
         state.senderCard.balance < state.amount) {
-      emit(state.copyWith(statusMessage: "validated"));
+      emit(state.copyWith(statusMessage: "not_validated"));
+      return;
     }
+    emit(state.copyWith(statusMessage: "validated"));
+    add(RunTransactionEvent());
   }
 
   _runTransaction(RunTransactionEvent event, emit) async {
@@ -60,8 +74,12 @@ class TransactionBloc extends Bloc<TransactionEvent, TransactionState> {
     bool isUpdated2 = await _updateCard(cardReceiver);
 
     if (isUpdated1 && isUpdated2) {
-      emit(state.copyWith(
-          statusMessage: "transaction_success", status: FormsStatus.success));
+      emit(
+        state.copyWith(
+          statusMessage: "transaction_success",
+          status: FormsStatus.success,
+        ),
+      );
     }
   }
 
@@ -73,4 +91,18 @@ class TransactionBloc extends Bloc<TransactionEvent, TransactionState> {
       return false;
     }
   }
+
+  _setInitial(SetInitialEvent event, emit) {
+    emit(
+      TransactionState(
+        status: FormsStatus.pure,
+        errorMessage: "",
+        statusMessage: "",
+        receiverCard: CardModel.initial(),
+        senderCard: CardModel.initial(),
+        amount: 0.0,
+      ),
+    );
+  }
 }
+

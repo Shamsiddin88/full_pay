@@ -42,3 +42,8 @@ class RunTransactionEvent extends TransactionEvent{
 
   List<Object?> get props => [];
 }
+
+class SetInitialEvent extends TransactionEvent {
+  @override
+  List<Object?> get props => [];
+}

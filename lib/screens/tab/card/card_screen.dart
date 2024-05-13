@@ -42,7 +42,8 @@ class _CardScreenState extends State<CardScreen> {
       ),
       body: BlocBuilder<UserCardsBloc, UserCardsState>(
         builder: (context, state) {
-          return ListView(
+          return
+            ListView(
             children: List.generate(state.userCards.length, (index) {
               CardModel cardModel = state.userCards[index];
               var cardStartWith=cardModel.cardNumber.substring(0,4);

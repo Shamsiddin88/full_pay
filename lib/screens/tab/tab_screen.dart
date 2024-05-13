@@ -7,7 +7,6 @@ import 'package:full_pay/blocs/user_cards/user_cards_event.dart';
 import 'package:full_pay/screens/routes.dart';
 import 'package:full_pay/screens/tab/card/card_screen.dart';
 import 'package:full_pay/screens/tab/history/history_screen.dart';
-import 'package:full_pay/screens/tab/home/home_screen.dart';
 import 'package:full_pay/screens/tab/profile/profile_screen.dart';
 import 'package:full_pay/utils/images/app_images.dart';
 import 'package:full_pay/utils/project_extensions.dart';
@@ -29,9 +28,8 @@ class _TabScreenState extends State<TabScreen> {
   @override
   void initState() {
     _screens = [
-      HomeScreen(),
-      HistoryScreen(),
       CardScreen(),
+      HistoryScreen(),
       ProfileScreen(),
     ];
     super.initState();
@@ -58,21 +56,15 @@ class _TabScreenState extends State<TabScreen> {
           items: [
             BottomNavigationBarItem(
 
-              icon: SvgPicture.asset(AppImages.home,height: 24, colorFilter: ColorFilter.mode(Colors.white, BlendMode.srcIn),),
-              label: "Home",
-              activeIcon: SvgPicture.asset(AppImages.home,height: 36, colorFilter: ColorFilter.mode(Theme.of(context).primaryColor, BlendMode.srcIn),),
+              icon: SvgPicture.asset(AppImages.cardIcon,height: 24, colorFilter: ColorFilter.mode(Colors.white, BlendMode.srcIn),),
+              label: "Cards",
+              activeIcon: SvgPicture.asset(AppImages.cardIcon,height: 36, colorFilter: ColorFilter.mode(Theme.of(context).primaryColor, BlendMode.srcIn),),
             ),
             BottomNavigationBarItem(
 
               icon: SvgPicture.asset(AppImages.history,height: 24, colorFilter: ColorFilter.mode(Colors.white, BlendMode.srcIn),),
               label: "History",
               activeIcon: SvgPicture.asset(AppImages.history,height: 36, colorFilter: ColorFilter.mode(Theme.of(context).primaryColor, BlendMode.srcIn),),
-            ),
-            BottomNavigationBarItem(
-
-              icon: SvgPicture.asset(AppImages.cardIcon,height: 24, colorFilter: ColorFilter.mode(Colors.white, BlendMode.srcIn),),
-              label: "Cards",
-              activeIcon: SvgPicture.asset(AppImages.cardIcon,height: 36, colorFilter: ColorFilter.mode(Theme.of(context).primaryColor, BlendMode.srcIn),),
             ),
             BottomNavigationBarItem(
 
@@ -84,12 +76,12 @@ class _TabScreenState extends State<TabScreen> {
         ),
       ),
       floatingActionButton: FloatingActionButton(onPressed: () {
-        // context.read<TransactionBloc>().add(SetInitialEvent());
-        context.read<UserCardsBloc>().add(GetCardsByUserIdEvent(userId: FirebaseAuth.instance.currentUser!.uid));
+        context.read<TransactionBloc>().add(SetInitialEvent());
+        // context.read<UserCardsBloc>().add(GetCardsByUserIdEvent(userId: FirebaseAuth.instance.currentUser!.uid));
         Navigator.pushNamed(context, RouteNames.transferRoute);
       },
       child: Icon(Icons.add_card),),
-      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat
 
     );
   }

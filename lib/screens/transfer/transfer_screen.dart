@@ -1,17 +1,21 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:full_pay/blocs/history/history_bloc.dart';
+import 'package:full_pay/blocs/history/history_event.dart';
 import 'package:full_pay/blocs/transaction/transaction_bloc.dart';
 import 'package:full_pay/blocs/transaction/transaction_state.dart';
 import 'package:full_pay/blocs/user_cards/user_cards_bloc.dart';
 import 'package:full_pay/blocs/user_cards/user_cards_state.dart';
 import 'package:full_pay/data/models/card_model.dart';
+import 'package:full_pay/data/models/history_model.dart';
 import 'package:full_pay/screens/auth/widget/my_custom_button.dart';
 import 'package:full_pay/screens/tab/card/widgets/amount_input.dart';
 import 'package:full_pay/screens/tab/card/widgets/card_item_view.dart';
 import 'package:full_pay/screens/tab/card/widgets/card_number_input.dart';
 import 'package:full_pay/utils/project_extensions.dart';
 import 'package:full_pay/utils/styles/app_text_style.dart';
+import 'package:pinput/pinput.dart';
 
 class TransferScreen extends StatefulWidget {
   const TransferScreen({super.key});
@@ -41,12 +45,14 @@ class _TransferScreenState extends State<TransferScreen> {
   _init() {
     senderCard = context.read<UserCardsBloc>().state.userCards[0];
     List<CardModel> cards = context.read<UserCardsBloc>().state.activeCards;
+    print("SSSSSSSSSSSSSS${cards.length}");
     cardNumberController.addListener(
           () {
         String receiverCardNumber =
         cardNumberController.text.replaceAll(" ", "");
         if (receiverCardNumber.length == 16) {
           for (var element in cards) {
+            print(element);
             if (element.cardNumber == receiverCardNumber &&
                 senderCard.cardNumber != receiverCardNumber) {
               receiverCard = element;
@@ -171,6 +177,20 @@ class _TransferScreenState extends State<TransferScreen> {
                 child: MyCustomButton(
                   onTap: () {
                     context.read<TransactionBloc>().add(CheckValidationEvent());
+                    print(amountController.text.trim());
+                    context.read<HistoryBloc>().add(
+                      AddHistoryEvent(
+                        HistoryModel(
+                          amount: double.parse((amountController.text.replaceAll(RegExp(r'[^0-9]'), ''))),
+                          senderName: senderCard.cardHolder,
+                          receiverName: receiverCard.cardHolder,
+                          senderId: senderCard.userId,
+                          receiverId: receiverCard.userId,
+                          docId: "",
+                        ),
+                      ),
+                    );
+
                   },
                   title: "Yuborish",
                 ),

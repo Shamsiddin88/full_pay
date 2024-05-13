@@ -7,6 +7,7 @@ class AppConstants {
 
   static String users = "users";
   static String cards = "cards";
+  static String histories = "histories";
   static String cardsDatabase = "cards_database";
   static String pinCode = "pin_code";
   static String biometricsEnabled = "biometrics_enabled";

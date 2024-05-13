@@ -1,5 +1,6 @@
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:full_pay/data/forms_status.dart';
 import 'package:full_pay/data/models/network_response.dart';
 import 'package:full_pay/data/models/user_model.dart';
@@ -91,14 +92,29 @@ class UserProfileBloc extends Bloc<UserProfileEvent, UserProfileState> {
     emit(state.copyWith(status: FormsStatus.loading));
     NetworkResponse networkResponse =
     await userProfileRepository.getUserByUid(event.uid);
+
     if (networkResponse.errorCode.isEmpty) {
-      emit(state.copyWith(
-          status: FormsStatus.success, userModel: networkResponse.data as UserModel));
+      emit(
+        state.copyWith(
+          status: FormsStatus.success,
+          userModel: networkResponse.data as UserModel,
+        ),
+      );
+
+      String? token = await FirebaseMessaging.instance.getToken();
+
+      if (token != null) {
+        UserModel userModel = state.userModel;
+        userModel = userModel.copyWith(fcm: token);
+        add(UpdateUserEvent(userModel));
+      }
     } else {
-      emit(state.copyWith(
-        statusMessage: networkResponse.errorCode,
-        status: FormsStatus.error,
-      ));
+      emit(
+        state.copyWith(
+          status: FormsStatus.error,
+          statusMessage: networkResponse.errorCode,
+        ),
+      );
     }
   }
 }

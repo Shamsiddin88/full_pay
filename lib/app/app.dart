@@ -2,12 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:full_pay/blocs/auth/auth_bloc.dart';
 import 'package:full_pay/blocs/auth/auth_event.dart';
+import 'package:full_pay/blocs/history/history_bloc.dart';
 import 'package:full_pay/blocs/transaction/transaction_bloc.dart';
 import 'package:full_pay/blocs/user_cards/user_cards_bloc.dart';
 import 'package:full_pay/blocs/user_cards/user_cards_event.dart';
 import 'package:full_pay/blocs/user_profile/user_profile_bloc.dart';
 import 'package:full_pay/data/repositories/auth_repository.dart';
 import 'package:full_pay/data/repositories/cards_repository.dart';
+import 'package:full_pay/data/repositories/histories_repository.dart';
 import 'package:full_pay/data/repositories/user_profile_repository.dart';
 import 'package:full_pay/screens/routes.dart';
 import 'package:full_pay/services/local_notification_service.dart';
@@ -26,6 +28,7 @@ class App extends StatelessWidget {
         RepositoryProvider(create: (_) => AuthRepository()),
         RepositoryProvider(create: (context) => UserProfileRepository()),
         RepositoryProvider(create: (context) => CardsRepository()),
+        RepositoryProvider(create: (context) => HistoriesRepository()),
       ],
       child: MultiBlocProvider(
         providers: [
@@ -43,6 +46,11 @@ class App extends StatelessWidget {
           BlocProvider(
             create: (context) => TransactionBloc(
               cardsRepository: context.read<CardsRepository>(),
+            ),
+          ),
+          BlocProvider(
+            create: (context) => HistoryBloc(
+              historiesRepository: context.read<HistoriesRepository>(),
             ),
           )
 

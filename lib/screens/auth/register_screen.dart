@@ -10,7 +10,6 @@ import 'package:full_pay/screens/auth/auth_screen.dart';
 import 'package:full_pay/screens/auth/widget/my_custom_button.dart';
 import 'package:full_pay/screens/auth/widget/password_text_input.dart';
 import 'package:full_pay/screens/auth/widget/universal_text_input.dart';
-import 'package:full_pay/screens/tab/home/home_screen.dart';
 import 'package:full_pay/utils/colors/app_colors.dart';
 import 'package:full_pay/utils/constants/app_constants.dart';
 import 'package:full_pay/utils/project_extensions.dart';
