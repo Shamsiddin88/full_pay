@@ -24,7 +24,7 @@ class AuthRepository {
       );
     }catch (error){
       return NetworkResponse(
-        errorText: "An unknown exception occured.${error}",
+        errorText: "An unknown exception occured.$error",
       );
     }
   }

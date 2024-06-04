@@ -1,6 +1,3 @@
-import 'dart:io';
-import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -10,8 +7,6 @@ import 'package:full_pay/blocs/auth/auth_event.dart';
 import 'package:full_pay/blocs/auth/auth_state.dart';
 import 'package:full_pay/blocs/user_profile/user_profile_bloc.dart';
 import 'package:full_pay/data/forms_status.dart';
-import 'package:full_pay/data/repositories/user_profile_repository.dart';
-import 'package:full_pay/screens/auth/register_screen.dart';
 import 'package:full_pay/screens/auth/widget/my_custom_button.dart';
 import 'package:full_pay/screens/auth/widget/password_text_input.dart';
 import 'package:full_pay/screens/auth/widget/universal_text_input.dart';
@@ -49,7 +44,7 @@ class _AuthScreenState extends State<AuthScreen> {
   @override
   Widget build(BuildContext context) {
     return AnnotatedRegion(
-        value: SystemUiOverlayStyle(
+        value: const SystemUiOverlayStyle(
             statusBarColor: AppColors.transparent,
             statusBarIconBrightness: Brightness.dark),
         child: Scaffold(
@@ -135,7 +130,7 @@ class _AuthScreenState extends State<AuthScreen> {
                           IconButton(
                               onPressed: () {
                                 context.read<AuthBloc>()
-                                  ..add(SignInWithGoogleEvent());
+                                  .add(SignInWithGoogleEvent());
                               },
                               icon: SvgPicture.asset(
                                 AppImages.google,
@@ -152,14 +147,14 @@ class _AuthScreenState extends State<AuthScreen> {
                       Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          Text("Ro'yxatdan o'tmaganmisiz?"),
+                          const Text("Ro'yxatdan o'tmaganmisiz?"),
                           Expanded(
                             child: TextButton(
                                 onPressed: () {
                                   Navigator.pushNamed(
                                       context, RouteNames.registerRoute);
                                 },
-                                child: Text(
+                                child: const Text(
                                   "Ro'yxatdan o'tish",
                                   textAlign: TextAlign.center,
                                 )),
@@ -180,8 +175,7 @@ class _AuthScreenState extends State<AuthScreen> {
                 if (state.statusMessage == "registered") {
                   BlocProvider.of<UserProfileBloc>(context)
                       .add(AddUserEvent(state.userModel));
-                }
-                else {
+                } else {
                   BlocProvider.of<UserProfileBloc>(context)
                       .add(GetCurrentUserEvent(state.userModel.authUid));
                 }

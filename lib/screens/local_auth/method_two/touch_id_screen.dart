@@ -18,7 +18,7 @@ class _TouchIdScreenState extends State<TouchIdScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("TouchID SCreeen"),
+        title: const Text("TouchID SCreeen"),
       ),
       body: Padding(
         padding: EdgeInsets.symmetric(horizontal: 24.w, vertical: 24.h),
@@ -56,10 +56,10 @@ class _TouchIdScreenState extends State<TouchIdScreen> {
       );
       if (!mounted) return;
       ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text("Biometrics Enabled")));
+          const SnackBar(content: Text("Biometrics Enabled")));
     } else {
       ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text("Biometrics Error")));
+          const SnackBar(content: Text("Biometrics Error")));
     }
     if (!mounted) return;
     Navigator.pushNamedAndRemoveUntil(

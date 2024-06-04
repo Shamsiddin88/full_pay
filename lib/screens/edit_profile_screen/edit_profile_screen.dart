@@ -1,13 +1,10 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:full_pay/blocs/auth/auth_bloc.dart';
-import 'package:full_pay/blocs/auth/auth_event.dart';
 import 'package:full_pay/blocs/user_profile/user_profile_bloc.dart';
 import 'package:full_pay/data/models/user_model.dart';
 import 'package:full_pay/screens/auth/widget/my_custom_button.dart';
 import 'package:full_pay/screens/edit_profile_screen/widget/edit_text_input.dart';
-import 'package:full_pay/screens/routes.dart';
 import 'package:full_pay/utils/constants/app_constants.dart';
 import 'package:full_pay/utils/project_extensions.dart';
 import 'package:full_pay/utils/styles/app_text_style.dart';
@@ -70,7 +67,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                           imageUrl: state.userModel.imageUrl.isEmpty
                               ? "https://img.freepik.com/premium-vector/3d-realistic-person-people_165488-4529.jpg"
                               : state.userModel.imageUrl,
-                          placeholder: (context, url) => CircularProgressIndicator(),
+                          placeholder: (context, url) => const CircularProgressIndicator(),
                           errorWidget: (context, url, error) => Container(
                             width: 150,
                             height: 150,
@@ -78,7 +75,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                               borderRadius: BorderRadius.circular(50),
                               color: Colors.blue,
                             ),
-                            child: Icon(Icons.error),
+                            child: const Icon(Icons.error),
                           ),
                         ),
                       ),
@@ -94,9 +91,6 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                 20.getH(),
                 MyCustomButton(onTap: (){
                   UserModel updatedUserModel = state.userModel;
-
-                  print("USERNAME${updatedUserModel.username}");
-
                   updatedUserModel=updatedUserModel.copyWith(username: userNameController.text, lastname: lastNameController.text, phoneNumber: phoneNumberController.text);
                   context.read<UserProfileBloc>().add(UpdateUserEvent(updatedUserModel));
                   Navigator.pop(context);

@@ -1,6 +1,4 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:full_pay/utils/images/app_images.dart';
 import 'package:full_pay/utils/project_extensions.dart';
 import 'package:full_pay/utils/styles/app_text_style.dart';
@@ -8,8 +6,8 @@ import 'package:intl/intl.dart';
 import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
 import '../../../../data/models/card_model.dart';
 
-class CardItemView extends StatelessWidget {
-  CardItemView({
+class CardItemView extends StatefulWidget {
+  const CardItemView({
     super.key,
     required this.cardModel,
     this.onTap,
@@ -21,9 +19,14 @@ class CardItemView extends StatelessWidget {
   final bool chipVisibility;
 
   @override
+  State<CardItemView> createState() => _CardItemViewState();
+}
+
+class _CardItemViewState extends State<CardItemView> {
+  @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: onTap,
+      onTap: widget.onTap,
       child: Container(
         margin: EdgeInsets.symmetric(
           horizontal: 16.w,
@@ -34,8 +37,8 @@ class CardItemView extends StatelessWidget {
           borderRadius: BorderRadius.circular(16),
           gradient: LinearGradient(
             colors: [
-              Color(int.parse("0xff${cardModel.color}")),
-              Color(int.parse("0xff${cardModel.color}")).withOpacity(0.5),
+              Color(int.parse("0xff${widget.cardModel.color}")),
+              Color(int.parse("0xff${widget.cardModel.color}")).withOpacity(0.5),
             ],
           ),
         ),
@@ -46,14 +49,14 @@ class CardItemView extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text(
-                  cardModel.bank,
+                  widget.cardModel.bank,
                   style: AppTextStyle.interSemiBold.copyWith(
                     fontSize: 18,
                     color: Colors.white,
                   ),
                 ),
                 Text(
-                  NumberFormat.currency(locale: "uz").format(cardModel.balance),
+                  NumberFormat.currency(locale: "uz").format(widget.cardModel.balance),
                   style: AppTextStyle.interSemiBold.copyWith(
                     fontSize: 15,
                     color: Colors.white,
@@ -63,7 +66,7 @@ class CardItemView extends StatelessWidget {
             ),
             SizedBox(height: 24.h),
             Visibility(
-              visible: chipVisibility,
+              visible: widget.chipVisibility,
               child: Padding(
                 padding: EdgeInsets.only(bottom: 16.h),
                 child: Image.asset(
@@ -81,7 +84,7 @@ class CardItemView extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        maskFormatter.maskText(cardModel.cardNumber),
+                        maskFormatter.maskText(widget.cardModel.cardNumber),
                         style: AppTextStyle.interSemiBold.copyWith(
                           fontSize: 18,
                           color: Colors.white,
@@ -91,7 +94,7 @@ class CardItemView extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           Text(
-                            cardModel.expireDate,
+                            widget.cardModel.expireDate,
                             style: AppTextStyle.interSemiBold.copyWith(
                               fontSize: 16,
                               color: Colors.white,
@@ -100,7 +103,7 @@ class CardItemView extends StatelessWidget {
                         ],
                       ),
                       Text(
-                        cardModel.cardHolder.toUpperCase(),
+                        widget.cardModel.cardHolder.toUpperCase(),
                         maxLines: 2,
                         overflow: TextOverflow.ellipsis,
                         style: AppTextStyle.interSemiBold.copyWith(
@@ -116,13 +119,13 @@ class CardItemView extends StatelessWidget {
                   decoration: BoxDecoration(
                       color: Colors.white,
                       borderRadius: BorderRadius.circular(5)),
-                  child: cardModel.type == -1
+                  child: widget.cardModel.type == -1
                       ? Icon(
                           Icons.credit_card,
                           size: 56.w,
                         )
                       : Image.asset(
-                          getIconPath(cardModel.type),
+                          getIconPath(widget.cardModel.type),
                           width: 56.w,
                           height: 56.w,
                         ),

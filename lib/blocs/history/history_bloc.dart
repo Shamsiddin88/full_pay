@@ -1,4 +1,3 @@
-import 'package:flutter/foundation.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:full_pay/blocs/history/history_event.dart';
 import 'package:full_pay/blocs/history/history_state.dart';
@@ -34,13 +33,11 @@ class HistoryBloc extends Bloc<HistoryEvent, HistoryState> {
           statusMessage: "added",
         ),
       );
-      print("554545454");
     } else {
       emit(state.copyWith(
         status: FormsStatus.error,
         errorMessage: response.errorText,
       ));
-      print("3333333333333333333${response.errorText}");
 
     }
   }
@@ -51,7 +48,6 @@ class HistoryBloc extends Bloc<HistoryEvent, HistoryState> {
     await emit.onEach(
       historiesRepository.getHistoriesByUserId(event.userId),
       onData: (List<HistoryModel> histories) {
-        debugPrint("DATABASE CARDS LENGTH${histories.length}");
         emit(state.copyWith(histories: histories));
       },
     );

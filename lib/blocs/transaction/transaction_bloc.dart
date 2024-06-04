@@ -1,6 +1,6 @@
-import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/foundation.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:full_pay/blocs/transaction/transaction_state.dart';
 import 'package:full_pay/data/forms_status.dart';
 import 'package:full_pay/data/models/card_model.dart';

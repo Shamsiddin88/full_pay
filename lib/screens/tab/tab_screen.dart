@@ -1,9 +1,7 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:full_pay/blocs/transaction/transaction_bloc.dart';
-import 'package:full_pay/blocs/user_cards/user_cards_bloc.dart';
-import 'package:full_pay/blocs/user_cards/user_cards_event.dart';
 import 'package:full_pay/screens/routes.dart';
 import 'package:full_pay/screens/tab/card/card_screen.dart';
 import 'package:full_pay/screens/tab/history/history_screen.dart';
@@ -11,7 +9,6 @@ import 'package:full_pay/screens/tab/profile/profile_screen.dart';
 import 'package:full_pay/utils/images/app_images.dart';
 import 'package:full_pay/utils/project_extensions.dart';
 import 'package:full_pay/utils/styles/app_text_style.dart';
-import 'package:provider/provider.dart';
 
 class TabScreen extends StatefulWidget {
   const TabScreen({super.key});
@@ -28,9 +25,9 @@ class _TabScreenState extends State<TabScreen> {
   @override
   void initState() {
     _screens = [
-      CardScreen(),
-      HistoryScreen(),
-      ProfileScreen(),
+      const CardScreen(),
+      const HistoryScreen(),
+      const ProfileScreen(),
     ];
     super.initState();
   }
@@ -56,19 +53,19 @@ class _TabScreenState extends State<TabScreen> {
           items: [
             BottomNavigationBarItem(
 
-              icon: SvgPicture.asset(AppImages.cardIcon,height: 24, colorFilter: ColorFilter.mode(Colors.white, BlendMode.srcIn),),
+              icon: SvgPicture.asset(AppImages.cardIcon,height: 24, colorFilter: const ColorFilter.mode(Colors.white, BlendMode.srcIn),),
               label: "Cards",
               activeIcon: SvgPicture.asset(AppImages.cardIcon,height: 36, colorFilter: ColorFilter.mode(Theme.of(context).primaryColor, BlendMode.srcIn),),
             ),
             BottomNavigationBarItem(
 
-              icon: SvgPicture.asset(AppImages.history,height: 24, colorFilter: ColorFilter.mode(Colors.white, BlendMode.srcIn),),
+              icon: SvgPicture.asset(AppImages.history,height: 24, colorFilter: const ColorFilter.mode(Colors.white, BlendMode.srcIn),),
               label: "History",
               activeIcon: SvgPicture.asset(AppImages.history,height: 36, colorFilter: ColorFilter.mode(Theme.of(context).primaryColor, BlendMode.srcIn),),
             ),
             BottomNavigationBarItem(
 
-              icon: SvgPicture.asset(AppImages.profileTab,height: 24, colorFilter: ColorFilter.mode(Colors.white, BlendMode.srcIn),),
+              icon: SvgPicture.asset(AppImages.profileTab,height: 24, colorFilter: const ColorFilter.mode(Colors.white, BlendMode.srcIn),),
               label: "Profile",
               activeIcon: SvgPicture.asset(AppImages.profileTab,height: 36, colorFilter: ColorFilter.mode(Theme.of(context).primaryColor, BlendMode.srcIn),),
             ),
@@ -80,8 +77,8 @@ class _TabScreenState extends State<TabScreen> {
         // context.read<UserCardsBloc>().add(GetCardsByUserIdEvent(userId: FirebaseAuth.instance.currentUser!.uid));
         Navigator.pushNamed(context, RouteNames.transferRoute);
       },
-      child: Icon(Icons.add_card),),
-      floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat
+      child: const Icon(Icons.add_card),),
+      floatingActionButtonLocation: FloatingActionButtonLocation.endFloat
 
     );
   }

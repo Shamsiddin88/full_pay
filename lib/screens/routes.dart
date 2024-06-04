@@ -8,7 +8,6 @@ import 'package:full_pay/screens/local_auth/method_one/set_pin_screen.dart';
 import 'package:full_pay/screens/local_auth/method_two/touch_id_screen.dart';
 import 'package:full_pay/screens/no_internet/no_internet_screen.dart';
 import 'package:full_pay/screens/on_boarding/on_boarding_screen.dart';
-import 'package:full_pay/screens/payment/payment_screen.dart';
 import 'package:full_pay/screens/security/security_screen.dart';
 import 'package:full_pay/screens/splash/splash_screen.dart';
 import 'package:full_pay/screens/tab/card/add_card_screen.dart';
@@ -30,8 +29,7 @@ class AppRoutes {
 
       case RouteNames.transferRoute:
         return navigate(const TransferScreen());
-      case RouteNames.paymentRoute:
-        return navigate(const PaymentScreen());
+
       case RouteNames.authRoute:
         return navigate(const AuthScreen());
         case RouteNames.registerRoute:

@@ -1,13 +1,10 @@
-import 'package:bloc/bloc.dart';
-import 'package:equatable/equatable.dart';
-import 'package:flutter/cupertino.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:full_pay/blocs/user_cards/user_cards_event.dart';
 import 'package:full_pay/blocs/user_cards/user_cards_state.dart';
 import 'package:full_pay/data/forms_status.dart';
 import 'package:full_pay/data/models/card_model.dart';
 import 'package:full_pay/data/models/network_response.dart';
 import 'package:full_pay/data/repositories/cards_repository.dart';
-import 'package:pinput/pinput.dart';
 
 class UserCardsBloc extends Bloc<UserCardsEvent, UserCardsState> {
   UserCardsBloc({required this.cardsRepository})
@@ -79,7 +76,6 @@ class UserCardsBloc extends Bloc<UserCardsEvent, UserCardsState> {
       cardsRepository.getActiveCards(),
       onData: (List<CardModel> activeCards) {
         emit(state.copyWith(activeCards: activeCards));
-        debugPrint("ACTIVEEEEEEE${activeCards.length}");
       },
     );
   }
@@ -88,7 +84,6 @@ class UserCardsBloc extends Bloc<UserCardsEvent, UserCardsState> {
    await emit.onEach(cardsRepository.getCardsDatabase(),
         onData: (List<CardModel> userCards) {
           emit(state.copyWith(cardsDB: userCards));
-          print("KKKKKKKKKKKKKK${userCards.length}");
         });
 
   }

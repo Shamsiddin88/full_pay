@@ -7,6 +7,7 @@ class SetAmountEvent extends TransactionEvent{
 
   final double amount;
 
+  @override
   List<Object?> get props => [amount];
 }
 
@@ -15,6 +16,7 @@ class SetReceiverCardEvent extends TransactionEvent{
 
   final CardModel cardModel;
 
+  @override
   List<Object?> get props => [cardModel];
 }
 
@@ -24,6 +26,7 @@ class SetSenderCardEvent extends TransactionEvent{
 
   final CardModel cardModel;
 
+  @override
   List<Object?> get props => [cardModel];
 }
 
@@ -32,6 +35,7 @@ class SetSenderCardEvent extends TransactionEvent{
 class CheckValidationEvent extends TransactionEvent{
   CheckValidationEvent();
 
+  @override
   List<Object?> get props => [];
 }
 
@@ -40,6 +44,7 @@ class CheckValidationEvent extends TransactionEvent{
 class RunTransactionEvent extends TransactionEvent{
   RunTransactionEvent();
 
+  @override
   List<Object?> get props => [];
 }
 

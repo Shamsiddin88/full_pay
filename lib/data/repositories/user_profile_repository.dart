@@ -1,5 +1,4 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:full_pay/data/models/network_response.dart';
 import 'package:full_pay/data/models/user_model.dart';
 import 'package:full_pay/utils/constants/app_constants.dart';

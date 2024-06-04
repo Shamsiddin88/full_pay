@@ -33,7 +33,7 @@ class MyCustomButton extends StatelessWidget {
                 ? SizedBox(
                     height: 36.h,
                     width: 36.h,
-                    child: CircularProgressIndicator.adaptive(
+                    child: const CircularProgressIndicator.adaptive(
                       strokeWidth: 5,
                     ))
                 : Text(

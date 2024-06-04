@@ -10,12 +10,12 @@ class SecurityButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return TextButton(
-        style: TextButton.styleFrom(padding: EdgeInsets.all(16)),
+        style: TextButton.styleFrom(padding: const EdgeInsets.all(16)),
         onPressed: onTap,
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            Text("Biometrics"),
+            const Text("Biometrics"),
             CupertinoSwitch(
                 value: isEnabled,
                 onChanged: (v) {

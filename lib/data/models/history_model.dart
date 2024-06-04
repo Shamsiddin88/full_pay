@@ -1,5 +1,3 @@
-import 'package:full_pay/data/models/card_model.dart';
-
 class HistoryModel {
   final String docId;
   final String senderName;

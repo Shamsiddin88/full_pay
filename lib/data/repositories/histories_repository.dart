@@ -1,10 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:full_pay/data/models/card_model.dart';
 import 'package:full_pay/data/models/history_model.dart';
 import 'package:full_pay/data/models/network_response.dart';
 import 'package:full_pay/utils/constants/app_constants.dart';
-import 'package:pinput/pinput.dart';
 import 'package:rxdart/rxdart.dart';
 
 class HistoriesRepository {
@@ -24,8 +22,6 @@ class HistoriesRepository {
       return NetworkResponse(data: "success");
     } on FirebaseException catch (error) {
       debugPrint("HISTORY ADD ERROR:$error");
-      debugPrint("KIRMaDIIIIIIIIIIIIIII");
-
       return NetworkResponse(errorText: error.toString());
     }
   }
@@ -45,8 +41,6 @@ class HistoriesRepository {
         .map((event) =>
         event.docs.map((doc) => HistoryModel.fromJson(doc.data())).toList());
 
-
-    debugPrint("kkkkkkkkkkkkkkkk${docId}");
 
     return CombineLatestStream<List<HistoryModel>, List<HistoryModel>>(
         [senderHistories, receiverHistories], (list) => list.expand((element) => element).toList());

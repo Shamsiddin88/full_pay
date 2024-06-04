@@ -15,7 +15,6 @@ import 'package:full_pay/screens/tab/card/widgets/card_item_view.dart';
 import 'package:full_pay/screens/tab/card/widgets/card_number_input.dart';
 import 'package:full_pay/utils/project_extensions.dart';
 import 'package:full_pay/utils/styles/app_text_style.dart';
-import 'package:pinput/pinput.dart';
 
 class TransferScreen extends StatefulWidget {
   const TransferScreen({super.key});
@@ -45,14 +44,12 @@ class _TransferScreenState extends State<TransferScreen> {
   _init() {
     senderCard = context.read<UserCardsBloc>().state.userCards[0];
     List<CardModel> cards = context.read<UserCardsBloc>().state.activeCards;
-    print("SSSSSSSSSSSSSS${cards.length}");
     cardNumberController.addListener(
           () {
         String receiverCardNumber =
         cardNumberController.text.replaceAll(" ", "");
         if (receiverCardNumber.length == 16) {
           for (var element in cards) {
-            print(element);
             if (element.cardNumber == receiverCardNumber &&
                 senderCard.cardNumber != receiverCardNumber) {
               receiverCard = element;
@@ -174,25 +171,27 @@ class _TransferScreenState extends State<TransferScreen> {
                     Navigator.pop(context);
                   }
                 },
-                child: MyCustomButton(
-                  onTap: () {
-                    context.read<TransactionBloc>().add(CheckValidationEvent());
-                    print(amountController.text.trim());
-                    context.read<HistoryBloc>().add(
-                      AddHistoryEvent(
-                        HistoryModel(
-                          amount: double.parse((amountController.text.replaceAll(RegExp(r'[^0-9]'), ''))),
-                          senderName: senderCard.cardHolder,
-                          receiverName: receiverCard.cardHolder,
-                          senderId: senderCard.userId,
-                          receiverId: receiverCard.userId,
-                          docId: "",
+                child: Padding(
+                  padding: const EdgeInsets.all(24.0),
+                  child: MyCustomButton(
+                    onTap: () {
+                      context.read<TransactionBloc>().add(CheckValidationEvent());
+                      context.read<HistoryBloc>().add(
+                        AddHistoryEvent(
+                          HistoryModel(
+                            amount: double.parse((amountController.text.replaceAll(RegExp(r'[^0-9]'), ''))),
+                            senderName: senderCard.cardHolder,
+                            receiverName: receiverCard.cardHolder,
+                            senderId: senderCard.userId,
+                            receiverId: receiverCard.userId,
+                            docId: "",
+                          ),
                         ),
-                      ),
-                    );
+                      );
 
-                  },
-                  title: "Yuborish",
+                    },
+                    title: "Yuborish",
+                  ),
                 ),
               )
             ],

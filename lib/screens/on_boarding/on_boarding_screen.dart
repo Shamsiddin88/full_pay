@@ -28,7 +28,7 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
               controller: controller,
               onPageChanged: (index) {},
               physics: const NeverScrollableScrollPhysics(),
-              children: [
+              children: const [
                 BoardingPageOne(),
                 BoardingPageTwo(),
                 BoardingPageThree(),
@@ -40,7 +40,7 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
             padding: EdgeInsets.symmetric(horizontal: 30.w, vertical: 24.h),
             child: Row(
               children: [
-                Spacer(),
+                const Spacer(),
                 ElevatedButton(
                   onPressed: () {
                     if (activeIndex == 2) {
@@ -62,7 +62,7 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
                       );
                     }
                   },
-                  child: Text("Keyingisi"),
+                  child: const Text("Keyingisi"),
                 ),
               ],
             ),

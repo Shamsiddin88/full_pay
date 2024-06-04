@@ -1,11 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:full_pay/app/app.dart';
-import 'package:full_pay/data/local/storage_repository.dart';
-import 'package:full_pay/screens/auth/widget/my_custom_button.dart';
 import 'package:full_pay/screens/local_auth/method_one/widgets/custom_keyboard_view.dart';
 import 'package:full_pay/screens/local_auth/method_one/widgets/pin_put_view.dart';
 import 'package:full_pay/screens/routes.dart';
-import 'package:full_pay/utils/constants/app_constants.dart';
 import 'package:full_pay/utils/project_extensions.dart';
 import 'package:full_pay/utils/styles/app_text_style.dart';
 import 'package:pinput/pinput.dart';

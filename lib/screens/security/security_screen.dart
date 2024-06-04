@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:full_pay/data/local/storage_repository.dart';
 import 'package:full_pay/screens/security/widgets/security_button.dart';
@@ -17,7 +16,7 @@ class _SecurityScreenState extends State<SecurityScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Security"),
+        title: const Text("Security"),
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
@@ -43,10 +42,10 @@ class _SecurityScreenState extends State<SecurityScreen> {
                       );
                       if (!mounted) return;
                       ScaffoldMessenger.of(context).showSnackBar(
-                          SnackBar(content: Text("Biometrics Enabled")));
+                          const SnackBar(content: Text("Biometrics Enabled")));
                     } else {
                       ScaffoldMessenger.of(context).showSnackBar(
-                          SnackBar(content: Text("Biometrics Error")));
+                          const SnackBar(content: Text("Biometrics Error")));
                     }
                     }
                   setState(() {

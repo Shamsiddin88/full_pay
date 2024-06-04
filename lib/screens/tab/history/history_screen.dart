@@ -25,10 +25,9 @@ class _HistoryScreenState extends State<HistoryScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: (AppBar(title: Text("History Screen"))),
+        appBar: (AppBar(title: const Text("History Screen"))),
         body: BlocBuilder<HistoryBloc, HistoryState>(
           builder: (context, state) {
-            print(state.histories.length);
             return ListView(
               children: List.generate(state.histories.length, (index) {
                 HistoryModel historyModel = state.histories[index];

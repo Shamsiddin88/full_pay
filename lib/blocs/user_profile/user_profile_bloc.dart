@@ -1,6 +1,6 @@
-import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:full_pay/data/forms_status.dart';
 import 'package:full_pay/data/models/network_response.dart';
 import 'package:full_pay/data/models/user_model.dart';

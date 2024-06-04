@@ -5,8 +5,7 @@ import 'package:full_pay/blocs/connectivity/connectivity_state.dart';
 import 'package:full_pay/utils/styles/app_text_style.dart';
 
 class NoInternetScreen extends StatefulWidget {
-  const NoInternetScreen({Key? key, required this.onInternetComeBack})
-      : super(key: key);
+  const NoInternetScreen({super.key, required this.onInternetComeBack});
   final VoidCallback onInternetComeBack;
 
   @override

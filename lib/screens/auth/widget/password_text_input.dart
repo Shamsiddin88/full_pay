@@ -58,7 +58,7 @@ class _PasswordTextInputState extends State<PasswordTextInput> {
               setState(() {
 
               });},
-              icon: passwordVisibility ? Icon(Icons.visibility_off) : Icon(
+              icon: passwordVisibility ? const Icon(Icons.visibility_off) : const Icon(
                   Icons.visibility),),
             labelStyle: Theme
                 .of(context)

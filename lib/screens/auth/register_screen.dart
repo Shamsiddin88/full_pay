@@ -6,7 +6,6 @@ import 'package:full_pay/blocs/auth/auth_event.dart';
 import 'package:full_pay/blocs/auth/auth_state.dart';
 import 'package:full_pay/data/forms_status.dart';
 import 'package:full_pay/data/models/user_model.dart';
-import 'package:full_pay/screens/auth/auth_screen.dart';
 import 'package:full_pay/screens/auth/widget/my_custom_button.dart';
 import 'package:full_pay/screens/auth/widget/password_text_input.dart';
 import 'package:full_pay/screens/auth/widget/universal_text_input.dart';
@@ -56,7 +55,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
     width = MediaQuery.of(context).size.width;
     height = MediaQuery.of(context).size.height;
     return AnnotatedRegion(
-      value: SystemUiOverlayStyle(
+      value: const SystemUiOverlayStyle(
           statusBarColor: AppColors.transparent,
           statusBarIconBrightness: Brightness.dark),
       child: Scaffold(
@@ -152,12 +151,12 @@ class _RegisterScreenState extends State<RegisterScreen> {
                           Row(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
-                              Text("Oldin ro'yxatdan o'tganmisiz?"),
+                              const Text("Oldin ro'yxatdan o'tganmisiz?"),
                               TextButton(
                                   onPressed: () {
                                     Navigator.pop(context);
                                   },
-                                  child: Text("Kirish"))
+                                  child: const Text("Kirish"))
                             ],
                           )
                         ],

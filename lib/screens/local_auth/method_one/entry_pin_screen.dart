@@ -1,13 +1,10 @@
-import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:full_pay/app/app.dart';
 import 'package:full_pay/blocs/auth/auth_bloc.dart';
 import 'package:full_pay/blocs/auth/auth_event.dart';
 import 'package:full_pay/blocs/auth/auth_state.dart';
 import 'package:full_pay/data/forms_status.dart';
 import 'package:full_pay/data/local/storage_repository.dart';
-import 'package:full_pay/screens/auth/widget/my_custom_button.dart';
 import 'package:full_pay/screens/local_auth/method_one/widgets/custom_keyboard_view.dart';
 import 'package:full_pay/screens/local_auth/method_one/widgets/pin_put_view.dart';
 import 'package:full_pay/screens/routes.dart';

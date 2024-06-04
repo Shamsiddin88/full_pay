@@ -3,7 +3,6 @@ import 'package:flutter/services.dart';
 import 'package:full_pay/utils/colors/app_colors.dart';
 import 'package:full_pay/utils/project_extensions.dart';
 import 'package:intl/intl.dart';
-import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
 
 class AmountInput extends StatefulWidget {
   final TextEditingController controller;
@@ -36,7 +35,6 @@ class _AmountInputState extends State<AmountInput> {
           offset: const Offset(10, 10),
         ),
       ]),
-      // padding: EdgeInsets.symmetric(vertical: 5.w),
       child: TextField(
         focusNode: widget.focusNode,
         controller: widget.controller,

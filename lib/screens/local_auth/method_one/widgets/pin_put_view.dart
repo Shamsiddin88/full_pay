@@ -42,12 +42,12 @@ class PinPutTextView extends StatelessWidget {
             height: 42.w,
             textStyle: TextStyle(fontSize: 36.w, color: AppColors.c_1A72DD)),
         preFilledWidget: Container(
-          margin: EdgeInsets.all(10),
-          decoration: BoxDecoration(shape: BoxShape.circle, color: Colors.grey),
+          margin: const EdgeInsets.all(10),
+          decoration: const BoxDecoration(shape: BoxShape.circle, color: Colors.grey),
         ),
         obscureText: true,
         obscuringWidget: Container(
-          margin: EdgeInsets.all(10),
+          margin: const EdgeInsets.all(10),
           decoration: BoxDecoration(
               shape: BoxShape.circle,
               color: isError ? Colors.red : Colors.blue),

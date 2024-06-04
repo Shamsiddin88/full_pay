@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:full_pay/utils/styles/app_text_style.dart';
 
@@ -18,7 +17,7 @@ class CustomKeyboardView extends StatelessWidget {
   Widget build(BuildContext context) {
     return Expanded(
       child: GridView.count(
-        physics: NeverScrollableScrollPhysics(),
+        physics: const NeverScrollableScrollPhysics(),
         crossAxisSpacing: 32,
         mainAxisSpacing: 0,
         crossAxisCount: 3,
@@ -35,7 +34,7 @@ class CustomKeyboardView extends StatelessWidget {
           }),
           Visibility(
               visible: isBiometricsEnabled,
-              child: IconButton(onPressed: onFingerPrintTap,icon: Icon(Icons.fingerprint, size: 45,))),
+              child: IconButton(onPressed: onFingerPrintTap,icon: const Icon(Icons.fingerprint, size: 45,))),
           IconButton(
               onPressed: () {
                 number.call("0");
@@ -44,7 +43,7 @@ class CustomKeyboardView extends StatelessWidget {
                 "0",
                 style: AppTextStyle.interBold.copyWith(fontSize: 24),
               )),
-          IconButton(onPressed: onClearButtonTap, icon: Icon(Icons.backspace_rounded)),
+          IconButton(onPressed: onClearButtonTap, icon: const Icon(Icons.backspace_rounded)),
 
         ],
       ),

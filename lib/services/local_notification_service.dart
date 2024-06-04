@@ -47,7 +47,6 @@ class LocalNotificationService {
         //   return UsersScreen();
         // }));
       }
-      print(notification.payload);
     });
 
     await flutterLocalNotificationsPlugin
@@ -63,7 +62,6 @@ class LocalNotificationService {
 
   @pragma('vm:entry-point')
   void notificationTapBackground(NotificationResponse notificationResponse) {
-    print("TAPPED FROM BACKGROUND");
   }
 
   AndroidNotificationChannel androidNotificationChannel =
@@ -81,7 +79,6 @@ class LocalNotificationService {
     String? body,
     String? payload,
   ) async {
-    print(payload);
   }
 
   void showNotification({

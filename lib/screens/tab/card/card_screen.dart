@@ -1,6 +1,4 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:full_pay/blocs/user_cards/user_cards_bloc.dart';
 import 'package:full_pay/blocs/user_cards/user_cards_event.dart';
@@ -31,13 +29,13 @@ class _CardScreenState extends State<CardScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("My Cards"),
+        title: const Text("My Cards"),
         actions: [
           IconButton(
               onPressed: () {
                 Navigator.pushNamed(context, RouteNames.addCardRoute);
               },
-              icon: Icon(Icons.add))
+              icon: const Icon(Icons.add))
         ],
       ),
       body: BlocBuilder<UserCardsBloc, UserCardsState>(
@@ -107,7 +105,7 @@ class _CardScreenState extends State<CardScreen> {
                         child: IconButton(onPressed: (){
                           context.read<UserCardsBloc>().add(DeleteCardEvent(cardModel.cardId));
 
-                        }, icon: Icon(Icons.delete, color: Colors.white,)))
+                        }, icon: const Icon(Icons.delete, color: Colors.white,)))
 
                   ],
                 ),
